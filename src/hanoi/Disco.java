@@ -27,7 +27,7 @@ public class Disco {
         if(dato==3){
            disco.setIcon(new ImageIcon("disco_naranja.png")); 
         }
-
+      
     }
    
     public JLabel getDisco() {

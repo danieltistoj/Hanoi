@@ -13,8 +13,9 @@ public class Pila {
     private Nodo_disco tope=null;
     private int size=0;
     
-    public void Apilar(Disco disco){
+    public void Apilar(Disco disco, int tamano){
         Nodo_disco nuevo = new Nodo_disco();
+        nuevo.setSize(tamano);
         nuevo.setDisco(disco);
         if(Vacia()){
             tope = nuevo;
@@ -38,6 +39,7 @@ public class Pila {
     
     public void Desapilar(){
         Nodo_disco aux = tope;
+        aux.setDisco(null);
         tope = aux.getSig();
         aux =null;
     }

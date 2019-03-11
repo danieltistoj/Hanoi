@@ -8,6 +8,7 @@ package hanoi;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,11 +25,13 @@ public class Ventana {
      JPanel panel;
      JButton boton_iniciar=new JButton("Iniciar"); 
      JButton boton_salir = new JButton("Salir");
+     JButton boton_barra2, boton_barra3;
      
      JLabel texto1, texto2, texto3, texto4, prueba;
        Pila pila_barra1 = new Pila();
        Pila pila_barra2 = new Pila();
        Pila pila_barra3 = new Pila();
+       int inicio;
          
      public Ventana(){
         
@@ -37,7 +40,11 @@ public class Ventana {
         Barra barra = new Barra();//barras 
         ComboBox combo = new ComboBox();//objeto combobox
         boton_iniciar.setBounds(1000, 700, 100, 30);
-        boton_salir.setBounds(1300, 700, 100, 30);s
+        boton_salir.setBounds(1300, 700, 100, 30);
+        boton_barra2 = new JButton("barra2");
+        boton_barra2.setBounds(60, 620, 80, 30);
+        boton_barra3 = new JButton("Barra3");
+        boton_barra3.setBounds(250, 620, 80, 30);
         prueba = new JLabel();
         texto1 = new JLabel();
         texto2 = new JLabel();
@@ -78,6 +85,8 @@ public class Ventana {
         panel.add(texto3);
         panel.add(texto4);
         panel.add(prueba);
+        panel.add(boton_barra2);
+        panel.add(boton_barra3);
         
         //........................................
         //accion boton iniciar....
@@ -88,10 +97,11 @@ public class Ventana {
                if(combo.getCombo().getItemAt(combo.getCombo().getSelectedIndex())=="1 disco"){
                   Disco disco = new Disco(1);
                   disco.setSize_Ubicacion(x,y,ancho,alto); 
-                  pila_barra1.Apilar(disco);
+                  pila_barra1.Apilar(disco,3);
                   panel.add(disco.getDisco());
                   panel.add(barra.getBarra1());
                   panel.repaint();
+                  inicio=1;
                   
                }
                if(combo.getCombo().getItemAt(combo.getCombo().getSelectedIndex())=="2 disco"){
@@ -100,7 +110,7 @@ public class Ventana {
                        if(conta==0){
                   Disco disco = new Disco(1);
                   disco.setSize_Ubicacion(x,y,ancho,alto); 
-                  pila_barra1.Apilar(disco);
+                  pila_barra1.Apilar(disco,3);
                   panel.add(disco.getDisco());
                   panel.add(barra.getBarra1());
                   panel.repaint();  
@@ -109,7 +119,7 @@ public class Ventana {
                   Disco disco = new Disco(2);
                   disco.setSize_Ubicacion(x+30,y-40,ancho-50,alto); 
                   
-                  pila_barra1.Apilar(disco);
+                  pila_barra1.Apilar(disco,2);
                   panel.add(disco.getDisco());
                   panel.add(barra.getBarra1());
                   panel.repaint();
@@ -118,6 +128,7 @@ public class Ventana {
                 
                        conta++;
                    }
+                   inicio=2;
                    
                }
                
@@ -127,7 +138,7 @@ public class Ventana {
                         if(conta==0){
                   Disco disco = new Disco(1);
                   disco.setSize_Ubicacion(x,y,ancho,alto); 
-                  pila_barra1.Apilar(disco);
+                  pila_barra1.Apilar(disco,3);
                   panel.add(disco.getDisco());
                   panel.add(barra.getBarra1());
                   panel.repaint();  
@@ -136,7 +147,7 @@ public class Ventana {
                   Disco disco = new Disco(2);
                   disco.setSize_Ubicacion(x+30,y-40,ancho-50,alto); 
                   
-                  pila_barra1.Apilar(disco);
+                  pila_barra1.Apilar(disco,2);
                   panel.add(disco.getDisco());
                   panel.add(barra.getBarra1());
                   panel.repaint();
@@ -146,7 +157,7 @@ public class Ventana {
                   Disco disco = new Disco(3);
                   disco.setSize_Ubicacion(x+60,y-85,ancho-100,alto); 
                   
-                  pila_barra1.Apilar(disco);
+                  pila_barra1.Apilar(disco,1);
                   panel.add(disco.getDisco());
                   panel.add(barra.getBarra1());
                   panel.repaint();
@@ -154,7 +165,7 @@ public class Ventana {
                        }
                        conta++;
                    }
-                   
+                   inicio=3;
                }
             }
         });
@@ -167,6 +178,92 @@ public class Ventana {
             }
         });
         //........................................
+        //accion boton barra2......
+        boton_barra2.addActionListener(new ActionListener() {
+            @Override
+            
+            public void actionPerformed(ActionEvent e) {
+                int ancho,alto,size;
+                if(pila_barra1.Vacia()!=true){
+              Nodo_disco nodo = new Nodo_disco();
+              ancho=pila_barra1.getTope().getDisco().getDisco().getWidth();
+              alto=pila_barra1.getTope().getDisco().getDisco().getHeight();
+              size = pila_barra1.getTope().getSize();
+              
+              
+              if(size==3){
+                   pila_barra1.getTope().getDisco().getDisco().setBounds(550, 570, ancho, alto);
+              
+              }
+              if(size==2){
+                   pila_barra1.getTope().getDisco().getDisco().setBounds(570, 570, ancho, alto);
+                  
+              }
+              
+              if(size==1){
+                   pila_barra1.getTope().getDisco().getDisco().setBounds(600, 570, ancho, alto);
+                  
+              }
+              
+              
+              
+              JLabel aux = new JLabel();
+              aux.setIcon(pila_barra1.getTope().getDisco().getDisco().getIcon());
+              Disco disco1 = new Disco(1);
+              disco1.setDisco(aux);
+              pila_barra2.Apilar(disco1,pila_barra1.getTope().getSize());
+              pila_barra1.Desapilar();
+              
+              panel.add(pila_barra2.getTope().getDisco().getDisco());
+              panel.add(barra.getBarra2());
+              panel.repaint();
+                }
+               
+            }
+        });
+        //................................................................
+        //accion boton_barra3.....................
+        boton_barra3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+           if(pila_barra1.Vacia()!=true){
+              Nodo_disco nodo = new Nodo_disco();
+              int size,ancho,alto;
+              ancho=pila_barra1.getTope().getDisco().getDisco().getWidth();
+              alto=pila_barra1.getTope().getDisco().getDisco().getHeight();
+              size = pila_barra1.getTope().getSize();
+                          
+              if(size==3){
+                   pila_barra1.getTope().getDisco().getDisco().setBounds(1050, 570, ancho, alto);
+              
+              }
+              if(size==2){
+                   pila_barra1.getTope().getDisco().getDisco().setBounds(1090, 570, ancho, alto);
+                  
+              }
+              
+              if(size==1){
+                   pila_barra1.getTope().getDisco().getDisco().setBounds(1100, 570, ancho, alto);
+                  
+              }
+                
+              
+              
+              
+              JLabel aux = new JLabel();
+              aux.setIcon(pila_barra1.getTope().getDisco().getDisco().getIcon());
+              Disco disco1 = new Disco(1);
+              disco1.setDisco(aux);
+              pila_barra3.Apilar(disco1,pila_barra1.getTope().getSize());
+              pila_barra1.Desapilar();  
+              panel.add(pila_barra3.getTope().getDisco().getDisco());
+              panel.add(barra.getBarra3());
+              panel.repaint();
+                }
+               
+            }
+        });
+        
         //Inicializar ventana y panel.............
         panel.setVisible(true);
         ventana.add(panel);
