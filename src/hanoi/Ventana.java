@@ -23,6 +23,8 @@ public class Ventana {
      JFrame ventana;
      JPanel panel;
      JButton boton_iniciar=new JButton("Iniciar"); 
+     JButton boton_salir = new JButton("Salir");
+     
      JLabel texto1, texto2, texto3, texto4, prueba;
        Pila pila_barra1 = new Pila();
        Pila pila_barra2 = new Pila();
@@ -35,6 +37,7 @@ public class Ventana {
         Barra barra = new Barra();//barras 
         ComboBox combo = new ComboBox();//objeto combobox
         boton_iniciar.setBounds(1000, 700, 100, 30);
+        boton_salir.setBounds(1300, 700, 100, 30);s
         prueba = new JLabel();
         texto1 = new JLabel();
         texto2 = new JLabel();
@@ -69,6 +72,7 @@ public class Ventana {
         panel.add(barra.getBarra2());
         panel.add(combo.getCombo());//ingresar el combobox
         panel.add(boton_iniciar);
+        panel.add(boton_salir);
         panel.add(texto1);
         panel.add(texto2);
         panel.add(texto3);
@@ -155,6 +159,14 @@ public class Ventana {
             }
         });
         //...................................................................
+        //accion salir boton salir 
+        boton_salir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        //........................................
         //Inicializar ventana y panel.............
         panel.setVisible(true);
         ventana.add(panel);
