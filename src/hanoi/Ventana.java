@@ -40,7 +40,7 @@ public class Ventana {
         Barra barra = new Barra();//barras 
         ComboBox combo = new ComboBox();//objeto combobox
         boton_iniciar.setBounds(670, 700, 100, 30);
-        boton_salir.setBounds(1300, 700, 100, 30);
+        boton_salir.setBounds(1160, 700, 100, 30);
         boton_barra2 = new JButton("Barra2");//boton para mover a la barra 2 de la barra 1
         boton_barra2.setBounds(60, 620, 80, 30);
         boton_barra3 = new JButton("Barra3");//boton para mover a la barra 3 de la barra 1
@@ -102,11 +102,12 @@ public class Ventana {
         panel.add(boton_barra1_3);
         panel.add(boton_barra2_3);
         //........................................
+        int x=60 ,y=570, ancho=300, alto=30, altura_P2=530, altura_P3=485, altura_p1=570;
         //accion boton iniciar....
         boton_iniciar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               int x=60 ,y=570, ancho=300, alto=30;
+               
                
                if(combo.getCombo().getItemAt(combo.getCombo().getSelectedIndex())=="1 disco"){
                    Nodo_disco nodo = new Nodo_disco();
@@ -333,11 +334,11 @@ public class Ventana {
             public void actionPerformed(ActionEvent e) {
                 int ancho,alto,size;
                 if(pila_barra2.Vacia()!=true){//condicion 1
-                    if(pila_barra1.Vacia()){//mueve el disco a la barra 1 solo si esta esta vacia!
               ancho=pila_barra2.getTope().getDisco().getDisco().getWidth();
               alto=pila_barra2.getTope().getDisco().getDisco().getHeight();
               size = pila_barra2.getTope().getSize();
               Nodo_disco nodo = new Nodo_disco();
+                    if(pila_barra1.Vacia()){//mueve el disco a la barra 1 solo si esta esta vacia!
               if(size==3){
                   
                    panel.remove(pila_barra2.getTope().getDisco().getDisco());
@@ -376,13 +377,213 @@ public class Ventana {
               }
                     panel.repaint();   
                     }//fin de la condicion 2
+                    
+                    else{//si la barra uno no esta vacia !!!!!!!!*---
+                        int size_discoB3=pila_barra1.getTope().getSize();
+                        int size_pila = pila_barra1.getSize();
+                        if(size<size_discoB3){
+                            if(size_pila==1){//si la barra tres solo tiene un disco
+                                if(size==2){
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(2);
+                   disco1.setSize_Ubicacion(90, altura_P2, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(2);
+                   pila_barra1.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra1());
+                  
+                                }
+                                if(size==1){
+                                    
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(3);
+                   disco1.setSize_Ubicacion(120, altura_P2, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(1);
+                   pila_barra1.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra1()); 
+                                
+                                }
+                                panel.repaint(); 
+                            }//fin de la condicion si la barra 1 solo tiene un disco
+                            if(size_pila==2){                 
+                        if(size==1){//se crea el disco segun el tamano que tenga
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(3);
+                   disco1.setSize_Ubicacion(120, altura_P3, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(1);
+                   pila_barra1.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra1()); 
+                                   }
+                                   if(size==2){
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(2);
+                   disco1.setSize_Ubicacion(90, altura_P3, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(2);
+                   pila_barra1.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra1()); 
+                                       
+                                   }
+                                
+                                panel.repaint();
+                            }
+                            
+                        }
+                        else{
+                            System.out.println("disco pila 2 mayor al de pila 3");
+                        }
+                    }
+                    
                                  
                 }//fin condicion 1
                 else{
                     System.out.println("vacia");
                 }
-            }
+            }//fin de action performed
         });//fin de la accio del boton....
+        
+        //boton mover a la barra 3 de la barra 2.........................
+        boton_barra3_2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                int ancho,alto,size;
+                if(pila_barra2.Vacia()!=true){
+              ancho=pila_barra2.getTope().getDisco().getDisco().getWidth();
+              alto=pila_barra2.getTope().getDisco().getDisco().getHeight();
+              size = pila_barra2.getTope().getSize();
+              Nodo_disco nodo = new Nodo_disco();
+                    if(pila_barra3.Vacia()){
+
+             
+              if(size==3){
+                  
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(1);
+                   disco1.setSize_Ubicacion(1050, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(3);
+                   pila_barra3.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra3());  
+
+                  
+              }
+              if(size==2){
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(2);
+                   disco1.setSize_Ubicacion(1090, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(2);
+                   pila_barra3.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra3()); 
+              }
+              if(size==1){
+                  panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(3);
+                   disco1.setSize_Ubicacion(1100, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(1);
+                   pila_barra3.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra3());    
+              }
+                    panel.repaint();   
+
+                        
+                    }
+                    else{//si la barra tres no esta vacia
+                        int size_discoB3=pila_barra3.getTope().getSize();
+                        int size_pila = pila_barra3.getSize();
+                        if(size<size_discoB3){
+                            if(size_pila==1){//si la barra tres solo tiene un disco
+                                if(size==2){
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(2);
+                   disco1.setSize_Ubicacion(1090, altura_P2, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(2);
+                   pila_barra3.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra3());
+                  
+                                }
+                                if(size==1){
+                                    
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(3);
+                   disco1.setSize_Ubicacion(1100, altura_P2, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(1);
+                   pila_barra3.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra3()); 
+                                
+                                }
+                                panel.repaint(); 
+                            }//fin de la condicion si la barra 3 solo tiene un disco
+                            if(size_pila==2){
+                                
+                                
+                        if(size==1){//se crea el disco segun el tamano que tenga
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(3);
+                   disco1.setSize_Ubicacion(1100, altura_P3, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(1);
+                   pila_barra3.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra3()); 
+                                   }
+                                   if(size==2){
+                   panel.remove(pila_barra2.getTope().getDisco().getDisco());
+                   pila_barra2.Desapilar();
+                   Disco disco1 = new Disco(2);
+                   disco1.setSize_Ubicacion(1090, altura_P3, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(2);
+                   pila_barra3.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra3()); 
+                                       
+                                   }
+                                
+                                panel.repaint();
+                            }
+                            
+                        }
+                        else{
+                            System.out.println("disco pila 2 mayor al de pila 3");
+                        }
+                    }
+                   
+                        
+                    
+            }//fin de la condicion si pila 2 esta vacia 
+                else{
+                    System.out.println("vacia");
+                }
+            }
+        });//fin del boton**/*/*/*/*
+        
+     
         
         //Inicializar ventana y panel.............
         panel.setVisible(true);
