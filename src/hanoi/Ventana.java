@@ -205,6 +205,7 @@ public class Ventana {
             }
         });
         //........................................
+        //***ACCIONES DE LA BARRA 1 BOTONES PARA MOVER A LA BARRA 2 Y 3***
         //boton mover a al barra 2 de la barra 1......
         boton_barra2.addActionListener(new ActionListener() {
             @Override
@@ -213,13 +214,11 @@ public class Ventana {
                 int ancho,alto,size,x,y;
                
           if(pila_barra1.Vacia()!=true){// ve primero si la barra 1 tiene discos o no.
-              if(pila_barra2.Vacia()){ //si la barra dos esta basia...
-              
-              Nodo_disco nodo = new Nodo_disco();
+               Nodo_disco nodo = new Nodo_disco();
               ancho=pila_barra1.getTope().getDisco().getDisco().getWidth();
               alto=pila_barra1.getTope().getDisco().getDisco().getHeight();
               size = pila_barra1.getTope().getSize();
-              
+              if(pila_barra2.Vacia()){ //si la barra dos esta basia...       
               if(size==3){
                    panel.remove(pila_barra1.getTope().getDisco().getDisco());//esta funcion es para que el label no sea visible en el panel
                    pila_barra1.Desapilar();//luego se elimina el nodo que contiene a label con desapilar
@@ -258,18 +257,10 @@ public class Ventana {
                   
               }
                  panel.repaint();
-                }//fin del if del boton barra 2 de la barra 1****
+                }//fin condicion 2
               
-              else{//en dado caso la barra 2 ya tiene un disco----
-                  
-                  if(pila_barra1.getTope().getSize()<pila_barra2.getTope().getSize()){//si el disco de la barra uno es menor que el que esta en la cima de la barra 2...
-                 
-                      
-                      
-                  }
-              }//fin del else-**-*-
               
-                                              }//fin del primer if
+                                              }//fin condicion 1
             }
         });
         //................................................................
@@ -328,6 +319,7 @@ public class Ventana {
                
             }
         });
+        //***ACCIONES DE LA BARRA 2 BOTONES PARA MOVER A LA BARRA 1 Y 2***
         //boton mover a a la barra 1 de la barra 2. accion.....
         boton_barra1.addActionListener(new ActionListener() {
             @Override
@@ -583,7 +575,130 @@ public class Ventana {
             }
         });//fin del boton**/*/*/*/*
         
-     
+        //***ACCIONES DE LA BARRA 3 BOTONES PARA MOVER A LA BARRA 1 Y 2***
+        //boton para pasar a la barra 1...
+       boton_barra1_3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                  int ancho,alto,size,x,y;
+               
+          if(pila_barra3.Vacia()!=true){// ve primero si la barra 1 tiene discos o no.
+               Nodo_disco nodo = new Nodo_disco();
+              ancho=pila_barra3.getTope().getDisco().getDisco().getWidth();
+              alto=pila_barra3.getTope().getDisco().getDisco().getHeight();
+              size = pila_barra3.getTope().getSize();
+              if(pila_barra1.Vacia()){ //si la barra dos esta basia...       
+              if(size==3){
+                   panel.remove(pila_barra3.getTope().getDisco().getDisco());//esta funcion es para que el label no sea visible en el panel
+                   pila_barra3.Desapilar();//luego se elimina el nodo que contiene a label con desapilar
+                   Disco disco1 = new Disco(1);
+                   disco1.setSize_Ubicacion(60, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(3);
+                   pila_barra1.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra1());
+              }
+              if(size==2){
+                  
+                   panel.remove(pila_barra3.getTope().getDisco().getDisco());//esta funcion es para que el label no sea visible en el panel
+                   pila_barra3.Desapilar();//luego se elimina el nodo que contiene a label con desapilar
+                   Disco disco1 = new Disco(2);
+                   disco1.setSize_Ubicacion(90, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(2);
+                   pila_barra1.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra1());      
+              }
+              
+              if(size==1){
+                   panel.remove(pila_barra3.getTope().getDisco().getDisco());//esta funcion es para que el label no sea visible en el panel
+                   pila_barra3.Desapilar();//luego se elimina el nodo que contiene a label con desapilar
+                   Disco disco1 = new Disco(3);
+                   disco1.setSize_Ubicacion(120, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(1);
+                   pila_barra1.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra1());
+                   
+                  
+              }
+                 panel.repaint();
+                }//fin condicion 2
+              
+              
+                    }//fin condicion 1
+                
+                
+                
+                
+            }
+        });//fin del boton 1 de la barra 3
+       
+       //boton mover a la barra 2
+       boton_barra2_3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                  int ancho,alto,size,x,y;
+               
+          if(pila_barra3.Vacia()!=true){// ve primero si la barra 1 tiene discos o no.
+               Nodo_disco nodo = new Nodo_disco();
+              ancho=pila_barra3.getTope().getDisco().getDisco().getWidth();
+              alto=pila_barra3.getTope().getDisco().getDisco().getHeight();
+              size = pila_barra3.getTope().getSize();
+              if(pila_barra1.Vacia()){ //si la barra dos esta basia...       
+              if(size==3){
+                   panel.remove(pila_barra3.getTope().getDisco().getDisco());//esta funcion es para que el label no sea visible en el panel
+                   pila_barra3.Desapilar();//luego se elimina el nodo que contiene a label con desapilar
+                   Disco disco1 = new Disco(1);
+                   disco1.setSize_Ubicacion(550, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(3);
+                   pila_barra2.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra2());
+              }
+              if(size==2){
+                  
+                   panel.remove(pila_barra3.getTope().getDisco().getDisco());//esta funcion es para que el label no sea visible en el panel
+                   pila_barra3.Desapilar();//luego se elimina el nodo que contiene a label con desapilar
+                   Disco disco1 = new Disco(2);
+                   disco1.setSize_Ubicacion(570, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(2);
+                   pila_barra2.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra2());      
+              }
+              
+              if(size==1){
+                   panel.remove(pila_barra3.getTope().getDisco().getDisco());//esta funcion es para que el label no sea visible en el panel
+                   pila_barra3.Desapilar();//luego se elimina el nodo que contiene a label con desapilar
+                   Disco disco1 = new Disco(3);
+                   disco1.setSize_Ubicacion(600, 570, ancho, alto);
+                   nodo.setDisco(disco1);
+                   nodo.setSize(1);
+                   pila_barra2.Apilar(nodo);
+                   panel.add(disco1.getDisco());
+                   panel.add(barra.getBarra2());
+                   
+                  
+              }
+                 panel.repaint();
+                }//fin condicion 2
+              
+              
+                    }//fin condicion 1
+                
+                
+                
+                
+            }
+        });//fin del boton 1 de la barra 3
         
         //Inicializar ventana y panel.............
         panel.setVisible(true);
