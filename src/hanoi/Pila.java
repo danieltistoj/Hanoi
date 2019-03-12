@@ -42,6 +42,7 @@ public class Pila {
         aux.setDisco(null);
         tope = aux.getSig();
         aux =null;
+        size--;
     }
     
 

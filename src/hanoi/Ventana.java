@@ -25,7 +25,7 @@ public class Ventana {
      JPanel panel;
      JButton boton_iniciar=new JButton("Iniciar"); 
      JButton boton_salir = new JButton("Salir");
-     JButton boton_barra2, boton_barra3;
+     JButton boton_barra2, boton_barra3, boton_barra1,boton_barra3_2,boton_barra1_3,boton_barra2_3;
      
      JLabel texto1, texto2, texto3, texto4, prueba;
        Pila pila_barra1 = new Pila();
@@ -39,12 +39,22 @@ public class Ventana {
         panel=new JPanel();
         Barra barra = new Barra();//barras 
         ComboBox combo = new ComboBox();//objeto combobox
-        boton_iniciar.setBounds(1000, 700, 100, 30);
+        boton_iniciar.setBounds(670, 700, 100, 30);
         boton_salir.setBounds(1300, 700, 100, 30);
-        boton_barra2 = new JButton("barra2");
+        boton_barra2 = new JButton("Barra2");//boton para mover a la barra 2 de la barra 1
         boton_barra2.setBounds(60, 620, 80, 30);
-        boton_barra3 = new JButton("Barra3");
-        boton_barra3.setBounds(250, 620, 80, 30);
+        boton_barra3 = new JButton("Barra3");//boton para mover a la barra 3 de la barra 1
+        boton_barra3.setBounds(280, 620, 80, 30);
+        boton_barra1 = new JButton("Barra1");//boton para mover a la barra 1 de la barra 2
+        boton_barra1.setBounds(550, 620, 80, 30);
+        boton_barra3_2 = new JButton("Barra3");//boton para mover a la barra 3 de la barra 2
+        boton_barra3_2.setBounds(800, 620, 80, 30);
+        boton_barra1_3 = new JButton("Barra1");//boton para mover a la barra 1 de la barra 3
+        boton_barra1_3.setBounds(1050, 620, 80, 30);
+        boton_barra2_3 = new JButton("Barra2");//boton para mover a al barra 2 de la barra 3
+        boton_barra2_3.setBounds(1290, 620, 80, 30);
+        
+        
         prueba = new JLabel();
         texto1 = new JLabel();
         texto2 = new JLabel();
@@ -87,7 +97,10 @@ public class Ventana {
         panel.add(prueba);
         panel.add(boton_barra2);
         panel.add(boton_barra3);
-        
+        panel.add(boton_barra1);
+        panel.add(boton_barra3_2);
+        panel.add(boton_barra1_3);
+        panel.add(boton_barra2_3);
         //........................................
         //accion boton iniciar....
         boton_iniciar.addActionListener(new ActionListener() {
@@ -178,14 +191,15 @@ public class Ventana {
             }
         });
         //........................................
-        //accion boton barra2......
+        //accion boton barra2. boton de la barra 1 para mover a la barra 2......
         boton_barra2.addActionListener(new ActionListener() {
             @Override
             
             public void actionPerformed(ActionEvent e) {
                 int ancho,alto,size;
-                if(pila_barra1.Vacia()!=true){
-              Nodo_disco nodo = new Nodo_disco();
+          if(pila_barra1.Vacia()!=true){// ve primero si la barra 1 tiene discos o no.
+              if(pila_barra2.Vacia()==true){ //si la barra dos esta basia...
+          
               ancho=pila_barra1.getTope().getDisco().getDisco().getWidth();
               alto=pila_barra1.getTope().getDisco().getDisco().getHeight();
               size = pila_barra1.getTope().getSize();
@@ -217,17 +231,32 @@ public class Ventana {
               panel.add(pila_barra2.getTope().getDisco().getDisco());
               panel.add(barra.getBarra2());
               panel.repaint();
-                }
-               
+                 
+                }//fin del if del boton barra 2 de la barra 1****
+              
+              else{//en dado caso la barra 2 ya tiene un disco----
+                  int x=60 ,y=570;
+                  if(pila_barra1.getTope().getSize()<pila_barra2.getTope().getSize()){//si el disco de la barra uno es menor que el que esta en la cima de la barra 2...
+                   ancho=pila_barra1.getTope().getDisco().getDisco().getWidth();
+                   alto=pila_barra1.getTope().getDisco().getDisco().getHeight();
+                   size = pila_barra1.getTope().getSize();
+                   
+                   
+                      
+                      
+                  }
+              }//fin del else-**-*-
+              
+                                              }
             }
         });
         //................................................................
-        //accion boton_barra3.....................
+        //accion boton_barra3 boton de la barra 1 para mover a la barra 3.....................
         boton_barra3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
            if(pila_barra1.Vacia()!=true){
-              Nodo_disco nodo = new Nodo_disco();
+              
               int size,ancho,alto;
               ancho=pila_barra1.getTope().getDisco().getDisco().getWidth();
               alto=pila_barra1.getTope().getDisco().getDisco().getHeight();
@@ -247,9 +276,6 @@ public class Ventana {
                   
               }
                 
-              
-              
-              
               JLabel aux = new JLabel();
               aux.setIcon(pila_barra1.getTope().getDisco().getDisco().getIcon());
               Disco disco1 = new Disco(1);
@@ -263,6 +289,33 @@ public class Ventana {
                
             }
         });
+        //boton mover a a la barra 1 de la barra 2. accion.....
+        boton_barra1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int ancho,alto,size;
+                if(pila_barra2.Vacia()!=true){
+                    if(pila_barra1.Vacia()){
+                        
+                        JLabel aux = new JLabel();
+                      pila_barra2.getTope().getDisco().getDisco().setBounds(60, 570, 300, 30);
+                      aux.setIcon(pila_barra2.getTope().getDisco().getDisco().getIcon());
+                      Disco disco1 = new Disco(1);
+                      disco1.setDisco(aux);
+                      pila_barra1.Apilar(disco1, 3);
+                      pila_barra2.Desapilar();
+                      panel.add(pila_barra1.getTope().getDisco().getDisco());
+                      panel.repaint();
+                      
+                    }
+                    
+                    
+                }
+                else{
+                    System.out.println("vacia");
+                }
+            }
+        });//fin de la accio del boton
         
         //Inicializar ventana y panel.............
         panel.setVisible(true);
