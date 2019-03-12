@@ -10,25 +10,18 @@ package hanoi;
  * @author Usuario
  */
 public class Pila {
-    private Nodo_disco tope=null;
+    private Nodo_disco tope;
     private int size=0;
     
-    public void Apilar(Disco disco, int tamano){
-        Nodo_disco nuevo = new Nodo_disco();
-        nuevo.setSize(tamano);
-        nuevo.setDisco(disco);
+    public void Apilar(Nodo_disco nuevo){
         if(Vacia()){
-            tope = nuevo;
-            nuevo.setSize(3);
+            tope = nuevo;    
         }
         else
         {
-            int valor = tope.getSize()-1;
             Nodo_disco aux = tope;
             nuevo.setSig(aux);
-            tope = nuevo;
-            nuevo.setSize(valor);
-            
+            tope = nuevo;  
         }
         size++;
     }
@@ -39,7 +32,6 @@ public class Pila {
     
     public void Desapilar(){
         Nodo_disco aux = tope;
-        aux.setDisco(null);
         tope = aux.getSig();
         aux =null;
         size--;
